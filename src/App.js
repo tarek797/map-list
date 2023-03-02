@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 import Map from "./Components/Map";
 import EntriesList from "./Components/EntriesList";
 import EntriesData from "./TestData.json";
@@ -11,19 +12,21 @@ function App() {
   return (
     <div className="App">
       <Map />
-      <Container>
+      <Container className="mt-4">
         <Row>
-          <Col sm={8}>
+          <Col lg={6} md={6} sm={12}>
             <EntriesList
-              customWidth={6}
+              cate="CatA"
+              cardWidth={4}
               EntriesData={EntriesData.filter(
                 (entry) => entry.category === "A"
               )}
             />
           </Col>
-          <Col sm={4}>
+          <Col lg={3} md={4} sm={12}>
             <EntriesList
-              customWidth={12}
+              cate="CatB"
+              cardWidth={12}
               EntriesData={EntriesData.filter(
                 (entry) => entry.category === "B"
               )}
