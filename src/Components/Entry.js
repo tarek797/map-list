@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function Entry(props) {
-  console.log(props.entry);
   return (
     <Card className="rounded-0 p-3">
       <Card.Text>

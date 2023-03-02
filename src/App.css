@@ -13,5 +13,5 @@
 
 .row {
   justify-content: space-between !important;
-  gap: 30px;
+  gap:100px;
 }
