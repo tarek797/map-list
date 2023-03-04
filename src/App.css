@@ -1,4 +1,4 @@
-.map-container{
+.map-container {
   width: 100%;
   height: 50vh;
 }
@@ -7,11 +7,18 @@
   width: fit-content;
 }
 
-.card{
-  background-color: rgba(0, 0, 0, 0.2)!important;
+.card {
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .row {
   justify-content: space-between !important;
-  gap:100px;
+  gap: 50px;
+}
+
+.combobox-input {
+  width: 20rem;
+  height: 3rem;
+  margin: 0 20rem;
+  padding: 0.5rem;
 }

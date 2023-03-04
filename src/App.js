@@ -5,23 +5,22 @@ import Map from "./Components/Map";
 import EntriesList from "./Components/EntriesList";
 import EntriesData from "./TestData.json";
 import { useState } from "react";
+import SearchBar from "./Components/SearchBar";
 
 function App() {
   const [entries, setEntries] = useState(EntriesData);
-  const [isAFiltered, setIsAFiltered] = useState(false)
-  const [isBFiltered, setIsBFiltered] = useState(false)
-
-
+  const [isAFiltered, setIsAFiltered] = useState(false);
+  const [isBFiltered, setIsBFiltered] = useState(false);
 
   function filterByCategoryHandler(category) {
-    if (!isAFiltered  && category === "A") {
+    if (!isAFiltered && category === "A") {
       setEntries(EntriesData);
       setEntries((prev) => prev.filter((entry) => entry.category === category));
       setIsAFiltered(true);
     } else if (isAFiltered && category === "A") {
       setEntries(EntriesData);
       setIsAFiltered(false);
-    }else if (!isBFiltered && category === "B") {
+    } else if (!isBFiltered && category === "B") {
       setEntries(EntriesData);
       setEntries((prev) => prev.filter((entry) => entry.category === category));
       setIsBFiltered(true);
@@ -30,13 +29,12 @@ function App() {
       setIsBFiltered(false);
     }
   }
+  
 
   return (
     <div className="App">
-      <Map
-        EntriesData={entries}
-        handleFilterByCategory={filterByCategoryHandler}
-      />
+      <Map handleFilterByCategory={filterByCategoryHandler} />
+      
       <Container className="mt-4">
         <Row>
           <Col lg={6} md={6} sm={12}>
