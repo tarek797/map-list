@@ -11,7 +11,7 @@ function App() {
   const [entries, setEntries] = useState(EntriesData);
   const [isAFiltered, setIsAFiltered] = useState(false);
   const [isBFiltered, setIsBFiltered] = useState(false);
-
+  const [eventLocation, setEventLocation] = useState("");
   function filterByCategoryHandler(category) {
     if (!isAFiltered && category === "A") {
       setEntries(EntriesData);
@@ -29,16 +29,19 @@ function App() {
       setIsBFiltered(false);
     }
   }
-  
 
   return (
     <div className="App">
-      <Map handleFilterByCategory={filterByCategoryHandler} />
-      
+      <Map
+        handleFilterByCategory={filterByCategoryHandler}
+        eventLocation={eventLocation}
+      />
+
       <Container className="mt-4">
         <Row>
           <Col lg={6} md={6} sm={12}>
             <EntriesList
+              handleSetEventLocation={setEventLocation}
               cate="CatA"
               cardWidth={4}
               EntriesData={entries.filter((entry) => entry.category === "A")}
@@ -46,6 +49,7 @@ function App() {
           </Col>
           <Col lg={3} md={4} sm={12}>
             <EntriesList
+              handleSetEventLocation={setEventLocation}
               cate="CatB"
               cardWidth={12}
               EntriesData={entries.filter((entry) => entry.category === "B")}

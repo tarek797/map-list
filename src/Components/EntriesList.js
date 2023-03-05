@@ -20,7 +20,7 @@ function EntriesList(props) {
         {props.EntriesData && props.EntriesData.map((entry) => {
           return (
             <Col className="p-0 mt-4" key={entry.zip}>
-              <Entry entry={entry}  />
+              <Entry entry={entry} handleSetEventLocation={props.handleSetEventLocation} />
             </Col>
           );
         })}

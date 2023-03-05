@@ -13,7 +13,7 @@ function Entry(props) {
         {props.entry.address}-{props.entry.country}
       </Card.Subtitle>
       <Card.Text >{props.entry.description}</Card.Text>
-      <Button variant="light" size="sm">show on map</Button>
+      <Button variant="light" size="sm" onClick={()=>props.handleSetEventLocation(props.entry.address)}>show on map</Button>
     </Card>
   );
 }

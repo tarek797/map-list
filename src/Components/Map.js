@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import {
   GoogleMap,
   useLoadScript,
+  InfoWindow,
   MarkerF,
 } from "@react-google-maps/api";
 import blueMarker from "../imgs/blue-marker-32.png";
@@ -11,7 +12,7 @@ import orangeMarker from "../imgs/orange-marker-32.png";
 import SearchBar from "./SearchBar";
 
 function Map(props) {
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(null);
   const center = useMemo(() => ({ lat: 47, lng: 15 }), []);
   const libraries = useMemo(() => ["places"], []);
 
@@ -19,8 +20,6 @@ function Map(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     libraries,
   });
-
-  console.log(url);
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
@@ -32,13 +31,17 @@ function Map(props) {
         options={{ disableDefaultUI: false }}
       >
         <MarkerF position={center} />
-        {selected && <MarkerF
-          position={selected}
-          options={{ icon: orangeMarker }}
-        />}
+        {selected && (
+          <MarkerF position={selected} options={{ icon: orangeMarker }} />
+        )}
+        {props.eventLocation&&<InfoWindow position={{ lat: 47, lng: 15 }}>
+          <h1>{props.eventLocation}</h1>
+        </InfoWindow>}
       </GoogleMap>
-      <SearchBar  handleFilterByCategory={props.handleFilterByCategory}
-                  setSelected={setSelected}/>
+      <SearchBar
+        handleFilterByCategory={props.handleFilterByCategory}
+        setSelected={setSelected}
+      />
     </div>
   );
 }
