@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
-import AutoCompleteAdress from "./AutoCompleteAdress";
+import AutoCompleteAdressInputField from "./AutoCompleteAdressInputField";
 
 function SearchBar(props) {
   return (
     <Navbar variant="secondary" bg="secondary">
-      <AutoCompleteAdress setSelected={props.setSelected}/>
+      <AutoCompleteAdressInputField setSelected={props.setSelected}/>
       <Button onClick={() => props.handleFilterByCategory("A")} className="m-1">
         CatA
       </Button>

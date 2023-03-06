@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Combobox,
   ComboboxInput,
@@ -12,7 +12,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
-function AutoCompleteAdress(props) {
+function AutoCompleteAdressInputField(props) {
 
   const {
     ready,
@@ -25,7 +25,6 @@ function AutoCompleteAdress(props) {
   const handleSelect = async (address) => {
     setValue(address, false)
     clearSuggestions()
-
     const results = await getGeocode({address})
     const {lat, lng} = await getLatLng(results[0])
     props.setSelected({lat,lng})
@@ -52,4 +51,4 @@ function AutoCompleteAdress(props) {
   );
 }
 
-export default AutoCompleteAdress;
+export default AutoCompleteAdressInputField;
