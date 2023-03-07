@@ -27,7 +27,7 @@ function AutoCompleteAdressInputField(props) {
     clearSuggestions()
     const results = await getGeocode({address})
     const {lat, lng} = await getLatLng(results[0])
-    props.setSelected({lat,lng})
+    props.setSearchedLocation({lat,lng})
   }
 
   return (

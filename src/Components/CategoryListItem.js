@@ -7,7 +7,7 @@ function CategoryListItem(props) {
   async function convertAddresstoLatlng(address) {
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
-    props.setEventPosition({ lat, lng});
+    props.setinfoWindowPosition({ lat, lng});
   }
 
   const { startdate, enddate, headline, address, country, description } =
@@ -27,7 +27,7 @@ function CategoryListItem(props) {
           variant="light"
           size="sm"
           onClick={() => {
-            props.handleSetEventLocation(props.entry);
+            props.setInfoWindowData(props.entry);
             props.scrollToMap();
             convertAddresstoLatlng(`${address+","+country}`);
           }}

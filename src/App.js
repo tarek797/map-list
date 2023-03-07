@@ -10,16 +10,14 @@ function App() {
   const [entries, setEntries] = useState(EntriesData);
   const [isAFiltered, setIsAFiltered] = useState(false);
   const [isBFiltered, setIsBFiltered] = useState(false);
-  const [eventLocation, setEventLocation] = useState({});
-  const [eventPosition, setEventPosition] = useState(null);
+  const [infoWindowData, setInfoWindowData] = useState({});
+  const [infoWindowPosition, setinfoWindowPosition] = useState({});
 
-
-  const mapRef = useRef(null)
+  const mapRef = useRef(null);
 
   const scrollToMap = () => {
-    mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    mapRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-
 
   function filterByCategoryHandler(category) {
     if (!isAFiltered && category === "A") {
@@ -42,32 +40,25 @@ function App() {
   return (
     <div className="App">
       <Map
-        handleFilterByCategory={filterByCategoryHandler}
-        eventLocation={eventLocation}
-        handleSetEventLocation={setEventLocation}
-        mapRef={mapRef}
-        eventPosition={eventPosition}
+        filterByCategoryHandler={filterByCategoryHandler}
+        {...{ infoWindowData, setInfoWindowData, mapRef, infoWindowPosition }}
       />
       <Container className="mt-4">
         <Row>
           <Col lg={6} md={6} sm={12}>
             <CategoryList
-              handleSetEventLocation={setEventLocation}
-              cate="CatA"
+              category="CatA"
               cardWidth={4}
               EntriesData={entries.filter((entry) => entry.category === "A")}
-              scrollToMap = {scrollToMap}
-              setEventPosition = {setEventPosition}
+              {...{ setInfoWindowData, setinfoWindowPosition, scrollToMap }}
             />
           </Col>
           <Col lg={3} md={4} sm={12}>
             <CategoryList
-              handleSetEventLocation={setEventLocation}
-              cate="CatB"
+              category="CatB"
               cardWidth={12}
               EntriesData={entries.filter((entry) => entry.category === "B")}
-              scrollToMap = {scrollToMap}
-              setEventPosition = {setEventPosition}
+              {...{ setInfoWindowData, setinfoWindowPosition, scrollToMap }}
             />
           </Col>
         </Row>

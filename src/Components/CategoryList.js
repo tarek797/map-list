@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import Entry from "./CategoryListItem";
+import CategoryListItem from "./CategoryListItem";
 
 function CategoryList(props) {
   return (
@@ -13,7 +13,7 @@ function CategoryList(props) {
           sm={12}
           className=" block-example border border-dark rounded-0 p-3 text-center"
         >
-          {props.cate}
+          {props.category}
         </Card>
       </Row>
       <Row>
@@ -21,12 +21,12 @@ function CategoryList(props) {
           props.EntriesData.map((entry) => {
             return (
               <Col className="p-0 mt-4" key={entry.zip}>
-                <Entry
+                <CategoryListItem
                   entry={entry}
                   isButtonRendered = {true}
-                  handleSetEventLocation={props.handleSetEventLocation}
+                  setInfoWindowData={props.setInfoWindowData}
                   scrollToMap={props.scrollToMap}
-                  setEventPosition = {props.setEventPosition}
+                  setinfoWindowPosition = {props.setinfoWindowPosition}
                 />
               </Col>
             );
