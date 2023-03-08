@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 import AutoCompleteAdressInputField from "./AutoCompleteAddressInputField";
 
 function SearchBar(props) {
   const handleGetLocationClick = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        props.setMapZoom(15);
-        props.setMapCenter({ lat: latitude, lng: longitude });
-      },
-      (error) => console.log(error),
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-    );
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      props.setMapZoom(15);
+      props.setMapCenter({ lat: latitude, lng: longitude });
+    });
   };
   return (
     <Navbar
@@ -27,7 +23,7 @@ function SearchBar(props) {
         setMapZoom={props.setMapZoom}
       />
       <Button onClick={handleGetLocationClick} className="m-3">
-      🌐
+        🌐
       </Button>
 
       <Button

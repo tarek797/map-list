@@ -7,10 +7,8 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+import usePlacesAutocomplete from "use-places-autocomplete";
+import convertAddresstoLatLng from "../utils/convertAddresstoLatLng";
 
 function AutoCompleteAdressInputField(props) {
 
@@ -25,8 +23,7 @@ function AutoCompleteAdressInputField(props) {
   const handleSelect = async (address) => {
     setValue(address, false)
     clearSuggestions()
-    const results = await getGeocode({address})
-    const {lat, lng} = await getLatLng(results[0])
+    const {lat, lng} = await convertAddresstoLatLng(address)
     props.setSearchedLocation({lat,lng})
     props.setMapZoom(5)
     props.setMapCenter({lat, lng})

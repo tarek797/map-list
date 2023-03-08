@@ -1,14 +1,10 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { getGeocode, getLatLng } from "use-places-autocomplete";
+import convertAddresstoLatLng from "../utils/convertAddresstoLatLng";
 
 function CategoryListItem(props) {
-  async function convertAddresstoLatlng(address) {
-    const results = await getGeocode({ address });
-    const { lat, lng } = await getLatLng(results[0]);
-    return { lat, lng };
-  }
+  
   const { startdate, enddate, headline, address, country, description } =
     props.entry;
   return (
@@ -33,7 +29,7 @@ function CategoryListItem(props) {
           onClick={() => {
             props.setInfoWindowData(props.entry);
             props.scrollToMap();
-            convertAddresstoLatlng(`${address + "," + country}`).then(
+            convertAddresstoLatLng(`${address + "," + country}`).then(
               ({ lat, lng }) => {
                 props.setInfoWindowPosition({ lat, lng });
                 props.setMapCenter({ lat, lng });

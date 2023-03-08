@@ -17,8 +17,8 @@ function CategoryList(props) {
         </Card>
       </Row>
       <Row>
-        {props.EntriesData &&
-          props.EntriesData.map((entry) => {
+        {props.eventsData &&
+          props.eventsData.map((entry) => {
             return (
               <Col className="p-0 mt-4" key={entry.zip}>
                 <CategoryListItem

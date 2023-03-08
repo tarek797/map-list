@@ -2,20 +2,17 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import Map from "./Components/Map";
-import EntriesData from "./TestData.json";
+import importedEventsData from "./TestData.json";
 import { useRef, useState } from "react";
 import CategoryList from "./Components/CategoryList";
-import { useBootstrapMinBreakpoint } from "react-bootstrap/esm/ThemeProvider";
 
 function App() {
   const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
   const [mapZoom, setMapZoom] = useState(2.5);
-  const [entries, setEntries] = useState(EntriesData);
-  const [isAFiltered, setIsAFiltered] = useState(false);
-  const [isBFiltered, setIsBFiltered] = useState(false);
+  const [eventsData, setEventsData] = useState(importedEventsData);
+  const [isFiltered, setIsFiltered] = useState({ A: false, B: false });
   const [infoWindowData, setInfoWindowData] = useState({});
   const [infoWindowPosition, setInfoWindowPosition] = useState({});
-
   const mapRef = useRef(null);
 
   function scrollToMap() {
@@ -24,21 +21,28 @@ function App() {
       mapDiv.scrollIntoView({ behavior: "smooth" });
     }
   }
+
   function filterByCategoryHandler(category) {
-    if (!isAFiltered && category === "A") {
-      setEntries(EntriesData);
-      setEntries((prev) => prev.filter((entry) => entry.category === category));
-      setIsAFiltered(true);
-    } else if (isAFiltered && category === "A") {
-      setEntries(EntriesData);
-      setIsAFiltered(false);
-    } else if (!isBFiltered && category === "B") {
-      setEntries(EntriesData);
-      setEntries((prev) => prev.filter((entry) => entry.category === category));
-      setIsBFiltered(true);
-    } else if (isBFiltered && category === "B") {
-      setEntries(EntriesData);
-      setIsBFiltered(false);
+    setEventsData(importedEventsData);
+
+    if (category === "A") {
+      if (!isFiltered.A) {
+        setEventsData((prev) =>
+          prev.filter((entry) => entry.category === category)
+        );
+        setIsFiltered((prev) => ({ ...prev, A: true }));
+      } else {
+        setIsFiltered((prev) => ({ ...prev, A: false }));
+      }
+    } else if (category === "B") {
+      if (!isFiltered.B) {
+        setEventsData((prev) =>
+          prev.filter((entry) => entry.category === category)
+        );
+        setIsFiltered((prev) => ({ ...prev, B: true }));
+      } else {
+        setIsFiltered((prev) => ({ ...prev, B: false }));
+      }
     }
   }
 
@@ -63,7 +67,7 @@ function App() {
             <CategoryList
               category="CatA"
               cardWidth={6}
-              EntriesData={entries.filter((entry) => entry.category === "A")}
+              eventsData={eventsData.filter((entry) => entry.category === "A")}
               {...{
                 setInfoWindowData,
                 setInfoWindowPosition,
@@ -74,11 +78,11 @@ function App() {
               }}
             />
           </Col>
-          <Col lg={3} md={3} sm={12} >
+          <Col lg={3} md={3} sm={12}>
             <CategoryList
               category="CatB"
               cardWidth={12}
-              EntriesData={entries.filter((entry) => entry.category === "B")}
+              eventsData={eventsData.filter((entry) => entry.category === "B")}
               {...{
                 setInfoWindowData,
                 setInfoWindowPosition,
