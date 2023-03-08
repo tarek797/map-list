@@ -5,15 +5,22 @@ import AutoCompleteAdressInputField from "./AutoCompleteAddressInputField";
 
 function SearchBar(props) {
   return (
-    <Navbar variant="secondary" bg="secondary">
-      <AutoCompleteAdressInputField setSearchedLocation={props.setSearchedLocation}/>
-      <Button onClick={() => props.filterByCategoryHandler("A")} className="m-1">
+    <Navbar variant="secondary" bg="secondary" className="justify-content-center">
+      <AutoCompleteAdressInputField
+        setSearchedLocation={props.setSearchedLocation}
+        setMapCenter={props.setMapCenter}
+        setMapZoom={props.setMapZoom}
+      />
+      <Button
+        onClick={() => props.filterByCategoryHandler("A")}
+        className="m-3"
+      >
         CatA
       </Button>
       <Button
         onClick={() => props.filterByCategoryHandler("B")}
         variant="light"
-        className="m-1"
+        className="m-3"
       >
         CatB
       </Button>

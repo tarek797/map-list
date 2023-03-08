@@ -8,17 +8,22 @@
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(177, 177, 177) !important;
+}
+
+.card-item {
+  height: 130px !important;
+  min-width: 175px !important;
 }
 
 .row {
-  justify-content: space-between !important;
-  gap: 50px;
+  justify-content: center !important;
+  gap: 20px !important;
+  min-width: 175px !important;
 }
 
 .combobox-input {
-  width: 20rem;
+  min-width: 10rem;
   height: 3rem;
-  margin: 0 20rem;
   padding: 0.5rem;
 }

@@ -28,10 +28,12 @@ function AutoCompleteAdressInputField(props) {
     const results = await getGeocode({address})
     const {lat, lng} = await getLatLng(results[0])
     props.setSearchedLocation({lat,lng})
+    props.setMapZoom(5)
+    props.setMapCenter({lat, lng})
   }
 
   return (
-    <Combobox onSelect={handleSelect}>
+    <Combobox onSelect={handleSelect} >
       <ComboboxInput
         value={value}
         onChange={(e) => setValue(e.target.value)}

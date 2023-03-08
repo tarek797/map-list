@@ -7,7 +7,7 @@ import CategoryListItem from "./CategoryListItem";
 
 function CategoryList(props) {
   return (
-    <Container>
+    <Container style={{ maxWidth: "370px" }}>
       <Row>
         <Card
           sm={12}
@@ -26,7 +26,10 @@ function CategoryList(props) {
                   isButtonRendered = {true}
                   setInfoWindowData={props.setInfoWindowData}
                   scrollToMap={props.scrollToMap}
-                  setinfoWindowPosition = {props.setinfoWindowPosition}
+                  setInfoWindowPosition = {props.setInfoWindowPosition}
+                  mapRef={props.mapRef}
+                  setMapCenter = {props.setMapCenter}
+                  setMapZoom = {props.setMapZoom}
                 />
               </Col>
             );
