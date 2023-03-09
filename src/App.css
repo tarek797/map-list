@@ -13,7 +13,8 @@
 
 .card-item {
   height: 130px !important;
-  min-width: 175px !important;
+  width: 175px !important;
+  
 }
 
 .row {

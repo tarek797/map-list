@@ -3,8 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 import AutoCompleteAdressInputField from "./AutoCompleteAddressInputField";
 import { useMediaQuery } from "@material-ui/core";
-import { SvgIcon } from "@material-ui/core";
-import MyLocationIcon from '@material-ui/icons/MyLocation';
+import MyLocationIcon from "@material-ui/icons/MyLocation";
 
 function SearchBar(props) {
   const isMobile = useMediaQuery("(max-width: 600px)");
@@ -33,8 +32,7 @@ function SearchBar(props) {
           className="m-1"
           variant="light"
         >
-            <MyLocationIcon />
-
+          <MyLocationIcon />
         </Button>
       )}
 

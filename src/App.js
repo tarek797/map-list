@@ -6,6 +6,8 @@ import importedEventsData from "./TestData.json";
 import { useEffect, useRef, useState } from "react";
 import CategoryList from "./Components/CategoryList";
 import { useMediaQuery } from "@material-ui/core";
+import filterByCategory from "./utils/filterByCategory";
+
 
 function App() {
   const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
@@ -30,36 +32,21 @@ function App() {
   }
 
   function filterByCategoryHandler(category) {
-    setEventsData(importedEventsData);
-
-    if (category === "A") {
-      if (!isFiltered.A) {
-        setEventsData((prev) =>
-          prev.filter((entry) => entry.category === category)
-        );
-        setIsFiltered((prev) => ({ ...prev, A: true }));
-      } else {
-        setIsFiltered((prev) => ({ ...prev, A: false }));
-      }
-    } else if (category === "B") {
-      if (!isFiltered.B) {
-        setEventsData((prev) =>
-          prev.filter((entry) => entry.category === category)
-        );
-        setIsFiltered((prev) => ({ ...prev, B: true }));
-      } else {
-        setIsFiltered((prev) => ({ ...prev, B: false }));
-      }
-    }
+    return filterByCategory(
+      category,
+      isFiltered,
+      setEventsData,
+      setIsFiltered,
+      importedEventsData
+    );
   }
 
   return (
     <div className="App">
       <Map
-        filterByCategoryHandler={filterByCategoryHandler}
         {...{
+          filterByCategoryHandler,
           infoWindowData,
-          setInfoWindowData,
           mapRef,
           infoWindowPosition,
           mapCenter,
@@ -76,34 +63,28 @@ function App() {
           <Col lg={8} md={8} sm={12}>
             <CategoryList
               category="CatA"
-              cardWidth={6}
               eventsData={eventsData.filter((entry) => entry.category === "A")}
               {...{
                 setInfoWindowData,
                 setInfoWindowPosition,
-                scrollToMap,
                 mapRef,
+                scrollToMap,
                 setMapCenter,
                 setMapZoom,
-                isMobile,
-                setIsActiveMap,
               }}
             />
           </Col>
           <Col lg={3} md={3} sm={12}>
             <CategoryList
               category="CatB"
-              cardWidth={12}
               eventsData={eventsData.filter((entry) => entry.category === "B")}
               {...{
                 setInfoWindowData,
                 setInfoWindowPosition,
-                scrollToMap,
                 mapRef,
+                scrollToMap,
                 setMapCenter,
                 setMapZoom,
-                isMobile,
-                setIsActiveMap,
               }}
             />
           </Col>

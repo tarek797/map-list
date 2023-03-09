@@ -23,13 +23,13 @@ function CategoryList(props) {
               <Col className="p-0 mt-4" key={entry.zip}>
                 <CategoryListItem
                   entry={entry}
-                  isButtonRendered = {true}
+                  isButtonRendered={true}
                   setInfoWindowData={props.setInfoWindowData}
-                  scrollToMap={props.scrollToMap}
-                  setInfoWindowPosition = {props.setInfoWindowPosition}
+                  setInfoWindowPosition={props.setInfoWindowPosition}
                   mapRef={props.mapRef}
-                  setMapCenter = {props.setMapCenter}
-                  setMapZoom = {props.setMapZoom}
+                  scrollToMap={props.scrollToMap}
+                  setMapCenter={props.setMapCenter}
+                  setMapZoom={props.setMapZoom}
                 />
               </Col>
             );
