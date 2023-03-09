@@ -8,7 +8,6 @@ import CategoryList from "./Components/CategoryList";
 import { useMediaQuery } from "@material-ui/core";
 import filterByCategory from "./utils/filterByCategory";
 
-
 function App() {
   const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
   const [mapZoom, setMapZoom] = useState(2.5);
@@ -60,34 +59,29 @@ function App() {
       />
       <Container className="mt-4" style={{ maxWidth: "700px" }}>
         <Row>
-          <Col lg={8} md={8} sm={12}>
-            <CategoryList
-              category="CatA"
-              eventsData={eventsData.filter((entry) => entry.category === "A")}
-              {...{
-                setInfoWindowData,
-                setInfoWindowPosition,
-                mapRef,
-                scrollToMap,
-                setMapCenter,
-                setMapZoom,
-              }}
-            />
-          </Col>
-          <Col lg={3} md={3} sm={12}>
-            <CategoryList
-              category="CatB"
-              eventsData={eventsData.filter((entry) => entry.category === "B")}
-              {...{
-                setInfoWindowData,
-                setInfoWindowPosition,
-                mapRef,
-                scrollToMap,
-                setMapCenter,
-                setMapZoom,
-              }}
-            />
-          </Col>
+          {[
+            { lg: 8, md: 8, sm: 12, category: "CatA", filterBy: "A" },
+            { lg: 3, md: 3, sm: 12, category: "CatB", filterBy: "B" },
+          ].map((list) => {
+            return (
+              <Col lg={list.lg} md={list.md} sm={list.sm}>
+                <CategoryList
+                  category={list.category}
+                  eventsData={eventsData.filter(
+                    (entry) => entry.category === list.filterBy
+                  )}
+                  {...{
+                    setInfoWindowData,
+                    setInfoWindowPosition,
+                    mapRef,
+                    scrollToMap,
+                    setMapCenter,
+                    setMapZoom,
+                  }}
+                />
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     </div>
