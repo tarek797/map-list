@@ -21,9 +21,9 @@ REACT_APP_GOOGLE_API_KEY = "your API key"
 ### desktop 
 ![](src/imgs/Screenshot%20(21).png)
 ### tablet
-![](src/imgs/Screenshot (23).png)
+![](src/imgs/Screenshot%20(23).png)
 ### phone
-![](src/imgs/Screenshot (25).png)
+![](src/imgs/Screenshot%20(25).png)
 
 ## Authors
 
