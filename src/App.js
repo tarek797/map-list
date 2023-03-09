@@ -64,7 +64,7 @@ function App() {
             { lg: 3, md: 3, sm: 12, category: "CatB", filterBy: "B" },
           ].map((list) => {
             return (
-              <Col lg={list.lg} md={list.md} sm={list.sm}>
+              <Col lg={list.lg} md={list.md} sm={list.sm} key={list.category}>
                 <CategoryList
                   category={list.category}
                   eventsData={eventsData.filter(
