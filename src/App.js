@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import Map from "./Components/Map";
 import importedEventsData from "./TestData.json";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CategoryList from "./Components/CategoryList";
+import { useMediaQuery } from "@material-ui/core";
 
 function App() {
   const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
@@ -14,6 +15,12 @@ function App() {
   const [infoWindowData, setInfoWindowData] = useState({});
   const [infoWindowPosition, setInfoWindowPosition] = useState({});
   const mapRef = useRef(null);
+
+  const [isActiveMap, setIsActiveMap] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  useEffect(() => {
+    setIsActiveMap(!isMobile);
+  }, [isMobile]);
 
   function scrollToMap() {
     if (mapRef.current) {
@@ -59,6 +66,9 @@ function App() {
           mapZoom,
           setMapCenter,
           setMapZoom,
+          isActiveMap,
+          isMobile,
+          setIsActiveMap,
         }}
       />
       <Container className="mt-4" style={{ maxWidth: "700px" }}>
@@ -75,6 +85,8 @@ function App() {
                 mapRef,
                 setMapCenter,
                 setMapZoom,
+                isMobile,
+                setIsActiveMap,
               }}
             />
           </Col>
@@ -90,6 +102,8 @@ function App() {
                 mapRef,
                 setMapCenter,
                 setMapZoom,
+                isMobile,
+                setIsActiveMap,
               }}
             />
           </Col>

@@ -4,12 +4,13 @@ import Card from "react-bootstrap/Card";
 import convertAddresstoLatLng from "../utils/convertAddresstoLatLng";
 
 function CategoryListItem(props) {
-  
   const { startdate, enddate, headline, address, country, description } =
     props.entry;
   return (
     <Card className="rounded-0 p-2 card-item">
-      <Card.Text style={{ fontStyle: 'italic', fontSize: "12px", margin: "1px 0" }}>
+      <Card.Text
+        style={{ fontStyle: "italic", fontSize: "12px", margin: "1px 0" }}
+      >
         {startdate}-{enddate}
       </Card.Text>
       <Card.Title style={{ fontSize: "14px", margin: "1px 0" }}>
@@ -27,6 +28,7 @@ function CategoryListItem(props) {
           variant="light"
           size="sm"
           onClick={() => {
+            if (props.isMobile) props.setIsActive(true);
             props.setInfoWindowData(props.entry);
             props.scrollToMap();
             convertAddresstoLatLng(`${address + "," + country}`).then(

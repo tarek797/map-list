@@ -2,8 +2,13 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 import AutoCompleteAdressInputField from "./AutoCompleteAddressInputField";
+import { useMediaQuery } from "@material-ui/core";
+import { SvgIcon } from "@material-ui/core";
+import MyLocationIcon from '@material-ui/icons/MyLocation';
 
 function SearchBar(props) {
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
   const handleGetLocationClick = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -22,20 +27,27 @@ function SearchBar(props) {
         setMapCenter={props.setMapCenter}
         setMapZoom={props.setMapZoom}
       />
-      <Button onClick={handleGetLocationClick} className="m-3">
-        🌐
-      </Button>
+      {isMobile && (
+        <Button
+          onClick={handleGetLocationClick}
+          className="m-1"
+          variant="light"
+        >
+            <MyLocationIcon />
+
+        </Button>
+      )}
 
       <Button
         onClick={() => props.filterByCategoryHandler("A")}
-        className="m-2"
+        className="ml-1"
       >
         CatA
       </Button>
       <Button
         onClick={() => props.filterByCategoryHandler("B")}
         variant="light"
-        className="m-2"
+        className="mr-1"
       >
         CatB
       </Button>

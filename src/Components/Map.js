@@ -4,12 +4,14 @@ import {
   useLoadScript,
   MarkerF,
   OverlayView,
+  OverlayViewF,
 } from "@react-google-maps/api";
 import blueMarkerIcon from "../imgs/blue-marker-32.png";
 import yellowMarkerIcon from "../imgs/yellow-marker-32.png";
 import orangeMarkerIcon from "../imgs/orange-marker-32.png";
 import SearchBar from "./SearchBar";
 import CategoryListItem from "./CategoryListItem";
+import { Button } from "react-bootstrap";
 
 function Map(props) {
   const [searchedLocation, setSearchedLocation] = useState(null);
@@ -20,6 +22,7 @@ function Map(props) {
     libraries,
   });
 
+
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <div>
@@ -28,7 +31,7 @@ function Map(props) {
         zoom={props.mapZoom}
         center={center}
         mapContainerClassName="map-container"
-        options={{ disableDefaultUI: false, mapTypeId: "satellite" }}
+        options={{ disableDefaultUI: !props.isActiveMap, mapTypeId: "satellite" }}
       >
         {searchedLocation && (
           <MarkerF
@@ -36,14 +39,13 @@ function Map(props) {
             options={{ icon: orangeMarkerIcon }}
           />
         )}
-
         {props.infoWindowData.address && props.infoWindowPosition.lat && (
-          <OverlayView
+          <OverlayViewF
             position={props.infoWindowPosition}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             getPixelPositionOffset={(width, height) => ({
               x: -width / 2,
-              y: -height,
+              y: -height / 2,
             })}
           >
             <div
@@ -58,8 +60,19 @@ function Map(props) {
                 isButtonRendered={false}
               />
             </div>
-          </OverlayView>
+          </OverlayViewF>
         )}
+
+        {props.isMobile&&!props.isActiveMap&&<OverlayViewF
+          position={{ lat: center.lat, lng: center.lng }}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          getPixelPositionOffset={(width, height) => ({
+            x: -width / 2,
+            y: -height / 2,
+          })}
+        >
+          <Button onClick={()=>props.setIsActiveMap(true)}>click to activate</Button>
+        </OverlayViewF>}
       </GoogleMap>
       <SearchBar
         filterByCategoryHandler={props.filterByCategoryHandler}

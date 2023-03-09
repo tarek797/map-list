@@ -9,9 +9,9 @@ import {
 import "@reach/combobox/styles.css";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import convertAddresstoLatLng from "../utils/convertAddresstoLatLng";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 function AutoCompleteAdressInputField(props) {
-
   const {
     ready,
     value,
@@ -21,16 +21,16 @@ function AutoCompleteAdressInputField(props) {
   } = usePlacesAutocomplete();
 
   const handleSelect = async (address) => {
-    setValue(address, false)
-    clearSuggestions()
-    const {lat, lng} = await convertAddresstoLatLng(address)
-    props.setSearchedLocation({lat,lng})
-    props.setMapZoom(5)
-    props.setMapCenter({lat, lng})
-  }
+    setValue(address, false);
+    clearSuggestions();
+    const { lat, lng } = await convertAddresstoLatLng(address);
+    props.setSearchedLocation({ lat, lng });
+    props.setMapZoom(15);
+    props.setMapCenter({ lat, lng });
+  };
 
   return (
-    <Combobox onSelect={handleSelect} >
+    <Combobox onSelect={handleSelect} className="mx-2">
       <ComboboxInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -42,7 +42,9 @@ function AutoCompleteAdressInputField(props) {
         <ComboboxList>
           {status === "OK" &&
             data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
+              <ComboboxOption key={place_id} value={description}>
+                <LocationOnIcon className="marker-icon" /> {description}
+              </ComboboxOption>
             ))}
         </ComboboxList>
       </ComboboxPopover>
